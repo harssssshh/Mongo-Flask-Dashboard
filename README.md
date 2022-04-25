@@ -8,7 +8,9 @@
 ` docker run --name os-dashboard -e DB_NAME=<Your-Database-Name> -e DB_USERNAME=<Your-Username> -e DB_PASS=<Your-Password> -e CLUSTER_NAME=<Cluster-Name (xxxxxx.xxx.mongodb.net)> --network=host -it <image-name>`
 
 **Replace the values in <>**
-**Application runs by defauly on Port 5000, if port that port is consumed on host replace --network=host with -p  YOUR-PORT:5000**
+
+
+**Application runs by default on Port 5000, if port that port is consumed on host replace --network=host with -p  YOUR-PORT:5000**
 
 
 ### Deploying On Kubernetes
