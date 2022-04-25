@@ -5,10 +5,10 @@
 2.  `docker build -t <image-name> .`
 3.  Application expects MongoDB creds. to be there using env. variables.
 4. Start the container :-
-5.  `docker run --name os-dashboard -e DB_NAME=<Your-Database-Name> -e DB_USERNAME=<Your-Username> -e DB_PASS=<Your-Password> -e CLUSTER_NAME=<Cluster-Name (xxxxxx.xxx.mongodb.net)> --network=host -it <image-name>`
+` docker run --name os-dashboard -e DB_NAME=<Your-Database-Name> -e DB_USERNAME=<Your-Username> -e DB_PASS=<Your-Password> -e CLUSTER_NAME=<Cluster-Name (xxxxxx.xxx.mongodb.net)> --network=host -it <image-name>`
 
 **Replace the values in <>**
-**Application runs on Port 5000, if port is consumed replace --network=host with -p  YOUR-PORT:5000**
+**Application runs by defauly on Port 5000, if port that port is consumed on host replace --network=host with -p  YOUR-PORT:5000**
 
 
 ### Deploying On Kubernetes
@@ -19,5 +19,5 @@
 2. Create a namespace: `kubectl create ns dashboard`
 3. `kubectl apply -n dashboard -f .`
 
-	** Replace the ClusterIP with NodePort if you don't  have ingress controller in server.yaml **
+	** Replace the ClusterIP with NodePort if you don't  have ingress controller in service.yaml **
 
