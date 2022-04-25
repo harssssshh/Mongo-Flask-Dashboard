@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dashboard-app
+  name: dashboard-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dashboard-app
+    spec:
+      containers:
+      - image: harssssshh/dashboard-lite
+        name: dashboard-app
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - secretRef:
+            name: dbcreds
+        resources: {}
+status: {}

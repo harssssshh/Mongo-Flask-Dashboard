@@ -1,0 +1,4 @@
+mongoengine
+Flask
+pymongo[srv]
+bcrypt
