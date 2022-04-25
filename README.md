@@ -10,7 +10,7 @@
 **Replace the values in <>**
 
 
-**Application runs by default on Port 5000, if port that port is consumed on host replace --network=host with -p  YOUR-PORT:5000**
+**Application runs by default on Port 5000, if that port is consumed on host replace --network=host with -p  YOUR-PORT:5000**
 
 
 ### Deploying On Kubernetes
