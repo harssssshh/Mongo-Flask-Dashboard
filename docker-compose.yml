@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  db:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: harsh
+      MONGO_INITDB_ROOT_PASSWORD: a1b2c3d4e5
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dashboard
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: test -e 
+      DB_USERNAME: harsh
+      DB_PASS: a1b2c3d4e5
+      HOSTNAME: db
+
+volumes:
+  mongodb_data:

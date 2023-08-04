@@ -7,9 +7,9 @@ import os
 dbName = os.environ["DB_NAME"]
 dbUsername = os.environ["DB_USERNAME"]
 dbPassword = os.environ["DB_PASS"]
-cluster = os.environ["CLUSTER_NAME"]
+hostname = os.environ["HOSTNAME"]
 
-host = f"mongodb+srv://{dbUsername}:{dbPassword}@{cluster}/{dbName}?retryWrites=true&w=majority"
+host = f"mongodb+srv://{dbUsername}:{dbPassword}@{hostname}/{dbName}?retryWrites=true&w=majority"
 # print(host)
 connection = connect(host=host)   
 
