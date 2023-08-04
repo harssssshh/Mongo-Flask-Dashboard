@@ -7,12 +7,13 @@ import os
 dbName = os.environ["DB_NAME"]
 dbUsername = os.environ["DB_USERNAME"]
 dbPassword = os.environ["DB_PASS"]
-hostname = os.environ["HOSTNAME"]
+dbPort = os.environ["DB_PORT"]
+dbHost = os.environ["DB_HOST"]
 
-host = f"mongodb+srv://{dbUsername}:{dbPassword}@{hostname}/{dbName}?retryWrites=true&w=majority"
-# print(host)
+#host = f"mongodb://{dbUsername}:{dbPassword}@{hostname}:{dbPort}/{dbName}?retryWrites=true&w=majority"
+host = f"mongodb://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}"
+print(host)
 connection = connect(host=host)   
-
 
 class User(Document):
     name = StringField(required=True)
