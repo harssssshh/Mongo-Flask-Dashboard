@@ -46,7 +46,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount the nginx.conf file
+      - ./nginx/default.conf:/etc/nginx/conf.d/ # Mount the nginx.conf file
     depends_on:
       - dashboard
 
