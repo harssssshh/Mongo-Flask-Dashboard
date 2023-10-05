@@ -23,11 +23,42 @@ services:
     depends_on:
       - db
     environment:
-      #DB_NAME: test 
       DB_USERNAME: hello 
       DB_PASS: secret 
       DB_HOST: "db"
       DB_PORT: 27017
+
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.20
+    container_name: mongodb-exporter
+    environment:
+      - MONGODB_USER=hello
+      - MONGODB_PASSWORD=secret
+    ports:
+      - "9216:9216"
+    command: --mongodb.uri=mongodb://db:27017
+    restart: always
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount the nginx.conf file
+    depends_on:
+      - dashboard
+
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter
+    container_name: nginx-exporter
+    restart: always
+    ports:
+      - "9113:9113"
+    command: -nginx.scrape-uri=http://nginx:80/metrics
+    depends_on:
+      - nginx
 
 volumes:
   lol:
