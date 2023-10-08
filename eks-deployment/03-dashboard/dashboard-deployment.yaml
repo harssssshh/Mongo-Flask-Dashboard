@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  namespace: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: amiharsh/mongo-flask-dashboard 
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_NAME
+              value: test
+            - name: DB_USERNAME
+              value: hello
+            - name: DB_PASS
+              value: secret
+            - name: DB_HOST
+              value: "mongodb.dashboard.svc.cluster.local"
+            - name: DB_PORT
+              value: "27017"
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+

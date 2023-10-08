@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-exporter
+  namespace: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-exporter
+  template:
+    metadata:
+      labels:
+        app: mongodb-exporter
+    spec:
+      containers:
+        - name: mongodb-exporter
+          image: percona/mongodb_exporter:0.39
+          ports:
+            - containerPort: 9216
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://exporter:password@mongodb.dashboard.svc.cluster.local:27017"
+          args: ["--collect-all"]
+

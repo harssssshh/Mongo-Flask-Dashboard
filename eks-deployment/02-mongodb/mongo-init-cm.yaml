@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init-config
+  namespace: dashboard
+data:
+  mongo-init.js: |
+    print("Started Adding the Users.");
+    db = db.getSiblingDB("admin");
+    db.createUser(
+      {
+        user: "exporter",
+        pwd: "password",
+        roles: [
+           { role: "clusterMonitor", db: "admin" },
+           { role: "read", db: "local" }
+        ]
+      }
+    );
+    print("End Adding the User Roles.");
