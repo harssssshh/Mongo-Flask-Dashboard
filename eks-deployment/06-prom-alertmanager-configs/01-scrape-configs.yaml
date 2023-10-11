@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: dashbiard-scrape-config 
+  namespace: monitoring
+  labels:
+    release: prom-stack
+spec:
+  staticConfigs:
+    - labels:
+        job: flask-mongodb-exporter
+      targets:
+        - mongodb-exporter.dashboard.svc.cluster.local:9216
+    - labels:
+        job: flask-nginx-exporter
+      targets:
+        - nginx-exporter.dashboard.svc.cluster.local:9113

@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  creationTimestamp: null
+  labels:
+    release: prom-stack 
+  name: flask-alert-rules
+  namespace: monitoring
+spec:
+    groups:
+    - name: ashu-flask-rule
+      rules:
+      - alert: AshuFlaskAppDeloymentReplicasMismatch
+        expr: kube_deployment_spec_replicas{namespace="dashboard", deployment="dashboard"} != kube_deployment_status_replicas_available{namespace="dashboard", deployment="dashboard"}
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Deployment {{ $labels.deployment }} in namespace {{ $labels.namespace }} has a replicas mismatch"
+          description: "The replicas for Deployment {{ $labels.deployment }} in namespace {{ $labels.namespace }} do not match for more than 1 minutes."
